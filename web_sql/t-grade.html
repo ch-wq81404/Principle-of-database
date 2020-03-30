@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+ 
+
+    <title>教务管理系统</title>
+	  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link href="CSS/bootstrap.css" rel="stylesheet"/>
+	<link href="CSS/font-awesome/css/font-awesome.css" rel="stylesheet" />
+     <link href="CSS/style.css" rel="stylesheet">
+	
+  </head>
+
+  <body>
+
+  <section id="container" >
+
+      <!--标题-->
+      <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+         </div>
+            <a class="logo"><b>教务管理系统</b></a>
+            <a class="btn btn-warning" id="out" href="login.html">注销</a>
+    </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      左边栏
+      *********************************************************************************************************************************************************** -->
+<aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+ 
+ 				 <p class="centered"><a><img src="head.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">工号：<span id="mageNo"></span></h5>
+                  <h5 class="centered">姓名：<span id="nameNo"></span></h5>
+              	  	
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>课程管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="teacher-master">课程信息</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>考试管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="t-test-info">考试信息</a></li>
+                      </ul>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      *********************************************************************************************************************************************************** -->
+      <!-- 页面 -->
+ <section id="main-content">
+          <section class="wrapper site-min-height">
+			 
+
+
+    	<h3><i class="fa fa-angle-right"></i>课程信息</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="heightplus">
+                      <div class="col-md-12">
+                             <h4><i class="fa fa-angle-right"></i>平时成绩录入</h4>
+						  
+                      </div>
+						</div>
+                          <section	class ="mt" >
+                          <table class="table table-bordered table-striped  table-hover" id="tb-tgrade">
+
+                                <thead>
+                                 
+                                 </thead>
+								   <tbody id="tbody">
+							
+							
+                           
+      
+																		
+
+              </tbody>
+            </table>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">录入</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">确认录入？</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="grade_submit">提交</button>
+            </div>
+			<div class="modal fade" id="editStudentInfo" role="dialog">
+-->
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">修改教师信息</h4>
+      </div>
+	<div id="editStudentModal" class="modal-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label for="editteaName" class="col-sm-2 control-label">平时成绩：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="psgrade" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="editteaSex" class="col-sm-2 control-label">考试成绩：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="ksgrade" type="text">
+            </div>
+			</div>
+			
+        </div>
+       </div>
+
+      <div class="modal-footer">
+        <div class="center-block">
+          <button id="cancelEdit" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button id="saveEdit" type="button" class="btn btn-success" data-dismiss="modal">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+			
+			
+			
+			
+			
+			
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+                     
+                          </section>
+                  </div>
+               </div>	
+<!--		  	</div>-->
+			
+		</section>
+      </section>
+
+      <!-- 页面 -->
+      <!-- 脚注 -->
+      <footer class="site-footer">
+          <div class="text-center">
+              上海大学  邮编: 200444
+
+          </div>
+      </footer>
+      <!--脚注-->
+  </section>
+
+	<script type="text/javascript" language="javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+	<script src ="js/common-scripts.js"></Script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/activity.js"></script>
+	<script>$('#identifier').modal(options)</script>
+<!--初始化代码-->
+<script>
+     $(document).ready(function() {
+    var username = getQueryUrlString('username');
+    var name = getQueryUrlString('name');
+    var semester = getQueryUrlString('semester');
+    var couNo = getQueryUrlString('couNo');
+    console.log(semester);
+    $('#mageNo').html(username);
+    $('#nameNo').html(name);
+    $('#teacher-master').attr("href","teacher-master.html?username=" + username + "&name=" + name);
+    $('#t-test-info').attr("href","t-test-info.html?username=" + username + "&name=" + name);
+
+    var table = $('#tb-tgrade').DataTable(
+		   {"bInfo":false,
+			"iDisplayLength" : 10, //默认显示的记录数 
+			columns: [
+				{ data: 'stuNo',title:"学号" },
+        { data: 'stuName',title:"姓名" },
+				{ data: 'addr',title:"平时成绩" },
+				{ data: 'state',title:"考试成绩" },
+				{ data: 'detail',title:"总评成绩" },
+    ],
+
+		   });
+
+		  $('#tb-tgrade tbody').on('click', 'tr', function () {
+      if ( $(this).hasClass('selected') ) {
+        $(this).removeClass('selected');
+      }
+      else {
+        table.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+      }
+    });
+		 
+$('#saveEdit').click(function(){
+	var psgrade=$('#psgrade').val();
+	var ksgrade=$('#ksgrade').val();
+	var rowData = table.rows('.selected').nodes()[0];
+	rowData.cells[2].innerHTML = psgrade;
+	rowData.cells[3].innerHTML = ksgrade;
+  var stuNo = rowData.cells[0].innerHTML;
+  var xhl = new XMLHttpRequest();
+  var method = "GET";
+  var url = "http://localhost/sql_php/edit_grade.php?stuNo=" + stuNo + "&couNo=" + couNo + "&pscj=" + psgrade + "&kscj=" + ksgrade + "&username=" + username + "&semester=" + semester;
+  xhl.onreadystatechange = function () {
+        if(xhl.readyState == 4 && xhl.status == 200) {
+            console.log(xhl.responseText);
+            location.reload();
+        }
+    }
+    xhl.open(method, url, true);
+    xhl.send();
+});
+
+    
+    var xhl = new XMLHttpRequest();
+    var method = "GET";
+    var url = "http://localhost/sql_php/get_stu_grade.php?username=" + username + "&semester=" + semester + "&couNo=" + couNo;
+    
+
+    xhl.onreadystatechange = function () {
+        if(xhl.readyState == 4 && xhl.status == 200) {
+          //console.log(xhl.responseText);
+          //window.alert(xhl.responseText);
+            var data = xhl.responseText;
+            console.log(data);
+            if(data != "无查询结果") {
+              var str = data.split('}');
+              for(var i = 0; i < str.length - 1; i++) {
+                str[i] += "}";
+                var _data = JSON.parse(str[i]);
+                console.log(_data['stuNo']);
+                table.rows.add([{
+                  "stuNo":_data['stuNo'],
+                  "stuName":_data['stuName'],
+                  "addr":_data['usPer'],
+                  "state":_data['testPer'],
+                  "detail":_data['totalPer'],
+      
+                }])
+                .draw();
+              }
+            }
+            else {
+
+            }
+        }
+    }
+    xhl.open(method, url, true);
+    xhl.send();
+
+
+      });
+</script>
+<script>
+	
+    function getQueryUrlString(name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+      var r = window.location.search.substr(1).match(reg);
+      if(r != null) {
+        return decodeURI(r[2]);
+      }
+      return "请选择";
+     }
+</script>
+  </body>
+</html>

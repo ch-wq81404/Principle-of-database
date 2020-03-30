@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+ 
+
+    <title>教务管理系统</title>
+	  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link href="CSS/bootstrap.css" rel="stylesheet"/>
+	<link href="CSS/font-awesome/css/font-awesome.css" rel="stylesheet" />
+     <link href="CSS/style.css" rel="stylesheet">
+	
+  </head>
+
+  <body>
+
+  <section id="container" >
+
+      <!--标题-->
+      <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+         </div>
+            <a class="logo"><b>教务管理系统</b></a>
+            <a class="btn btn-warning" id="out" href="login.html">注销</a>
+    </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      左边栏
+      *********************************************************************************************************************************************************** -->
+<aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+ 
+         <p class="centered"><a><img src="head.jpg" class="img-circle" width="60"></a></p>
+                  <h5 class="centered">学号：<span id="StuNo"></h5>
+                  <h5 class="centered">姓名：<span id="StuName"></h5>
+                    
+                     <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>课程管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="select-class">选课</a></li>
+                        <li><a  id="quit-class">退课</a></li>
+              <li><a  id="class-table">课程表</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>成绩管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="grade-lastest">上学期成绩</a></li>
+                        <li><a  id="grade-all">成绩大表</a></li>
+                      </ul>
+                  </li>
+            <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>考试管理</span>
+                      </a>
+                      <ul class="sub">
+              <li><a  id="test-info">考试信息</a></li>
+                          <li><a id="credit">学分抵充</a></li>
+                          <li><a id="apply">缓考申请</a></li>
+                      </ul>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      *********************************************************************************************************************************************************** -->
+      <!-- 页面 -->
+ <section id="main-content">
+          <section class="wrapper site-min-height">
+			 
+
+
+    	<h3><i class="fa fa-angle-right"></i>成绩管理</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="heightplus">
+                      <div class="col-md-12">
+                      <h4><i class="fa fa-angle-right"></i>上学期成绩</h4>
+						  
+                      </div>
+						</div>
+                          <section	class ="mt" >
+                          <table class="table table-bordered table-striped  table-hover" id="tblastest">
+
+                                <thead>
+                                 
+                                 </thead>
+							   <tbody id="tbody">														
+              </tbody>
+            </table>
+					<div style="margin: 0 2em" class = 'mt gradechartdiv'>
+       				 <div id="gradechart" style="min-width: 400px; height: 300px;"></div>
+</div>
+
+                     
+                          </section>
+		
+                  </div>
+               </div>	
+		  	</div>
+			
+		</section>
+      </section>
+
+      <!-- 页面 -->
+      <!-- 脚注 -->
+      <footer class="site-footer">
+          <div class="text-center">
+              上海大学  邮编: 200444
+
+          </div>
+      </footer>
+      <!--脚注-->
+  </section>
+
+	<script type="text/javascript" language="javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+	<script src ="js/common-scripts.js"></Script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/activity.js"></script>
+	<script>$('#identifier').modal(options)</script>
+	<script language="javascript" src="js/highcharts.js"></script>
+	<script src="js/exporting.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/table_operations"></script>
+
+ 
+<!--初始化代码-->
+	
+<script>
+    function getQueryUrlString(name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+      var r = window.location.search.substr(1).match(reg);
+
+      if(r != null) {
+
+        return decodeURI(r[2]);
+      }
+      return "请选择";
+     }
+</script> 
+
+<script>
+     $(document).ready(function() {
+    var username=getQueryUrlString('username');
+    var name = getQueryUrlString('name');
+    $('#StuNo').html(username);
+    $('#StuName').html(name);
+    $('#select-class').attr("href","select-class.html?username="+username + "&name=" + name);
+    $('#credit').attr("href","credit.html?username="+username + "&name=" + name);
+    $('#quit-class').attr("href","quit-class.html?username="+username + "&name=" + name);
+    $('#test-info').attr("href","test-info.html?username="+username + "&name=" + name);
+    $('#apply').attr("href","apply.html?username="+username + "&name=" + name); 
+    $('#grade-all').attr("href","grade-all.html?username="+username + "&name=" + name);
+    $('#grade-lastest').attr("href","grade-lastest.html?username="+username + "&name=" + name); 
+    $('#class-table').attr("href","class-table.html?username="+username + "&name=" + name); 
+     
+    var table=$('#tblastest').DataTable(
+       {"bInfo":false,
+      "iDisplayLength" : 10, //默认显示的记录数 
+      columns: [
+        { data: 'couName',title:"课程名" },
+        { data: 'couNo',title:"课程号" },
+        { data: 'Semester',title:"学期" },
+        { data: 'totalPer',title:"总评成绩" },
+   
+                   
+                ],
+ 
+       });
+    load();
+    
+     
+//     ==true ? true:false;
+     function load(){
+     xmlhttp=GetXmlHttpObject();
+      var i=0;
+      
+      if(xmlhttp!=null)
+      {
+          xmlhttp.onreadystatechange=function()
+          {
+            if(xmlhttp.readyState==4&&xmlhttp.status==200)
+            {  
+              var data=xmlhttp.responseText;
+              console.log(data);
+              if(data!="无结果")
+              {
+
+                var str=data.split('}');
+                
+                for(var i=0;i<str.length-1;i++){
+                  str[i]+="}";
+                  var _data=JSON.parse(str[i]);
+                  
+                  
+                  table.rows.add([{
+                    
+                    "couName":_data['couName'],
+                    "couNo":_data['couNo'],
+                    "Semester":_data['semester'],
+                    "totalPer":_data['totalPer'],
+                    
+                    
+                  }]) 
+                    .draw();
+                } 
+              }
+              
+            }
+          };
+      xmlhttp.open("GET","http://localhost/sql_php/Gradelastest_load.php?stuNo="+username,true);
+      xmlhttp.send();
+      }
+     };
+
+  
+   function GetXmlHttpObject()
+      {
+      var xmlhttp=null;
+      try
+       {
+       // Firefox, Opera 8.0+, Safari
+       xmlhttp=new XMLHttpRequest();
+       }
+      catch (e)
+       {
+       // Internet Explorer
+       try
+        {
+        xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");
+        }
+       catch (e)
+        {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+       }
+      return xmlhttp;
+      }
+
+  
+})
+    
+</script>
+	
+	
+<script>
+ $(document).ready(function() {
+                     setTimeout(
+                      function(){
+                            var xx = [];
+                            var yy = [];
+                        var tb=getTableContent('tblastest');
+                          console.log(tb);
+                         
+                          for(var i=0;i<tb.length;i++)
+                          {
+                            yy.push(Number(tb[i][3]));
+                            xx.push(tb[i][0]);
+                           
+                          }
+                         
+
+                                var chart;
+                                chart = new Highcharts.Chart({
+                                    chart: {
+                                        renderTo: 'gradechart',
+                                        //放置图表的容器
+                                        plotBackgroundColor: null,
+                                        plotBorderWidth: null,
+                    backgroundColor: '#F2F2F2',
+
+                                        defaultSeriesType: 'column' //图表类型line, spline, area, areaspline, column, bar, pie , scatter
+                                    },
+                                    title: {
+                                        text: '各科成绩表'
+                                    },
+                                    xAxis: { //X轴数据
+                                        categories: xx,
+                                        lineWidth: 2,
+                                        labels: {
+                                            align: 'right',
+                                            style: {
+                                                font: 'normal 13px 宋体'
+                                            }
+                                        }
+                                    },
+                                    yAxis: { //Y轴显示文字
+                                        lineWidth: 2,
+                                        title: {
+                                            text: '成绩/分'
+                                        }
+                                    },
+                                    tooltip: {
+                                        formatter: function() {
+                                            return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + Highcharts.numberFormat(this.y, 0);
+                                        }
+                                    },
+                                    plotOptions: {
+                                        column: {
+                                            dataLabels: {
+                                                enabled: true
+                                            },
+                                            enableMouseTracking: true //是否显示title
+                                        }
+                                    },
+                                    series: [{
+                                        name: '得分',
+                                        data: yy
+                                    }]
+                                    
+                                });
+
+
+
+                      },"1000");
+                    //   // var num=getTableRowsLength('tblastest');
+                    // console.log(num);
+                
+                                //$("tspan:last").hide(); //把广告删除掉
+                          
+                });     
+
+          
+  /** 
+ * 获取表格某一行列数
+ * @param  Int id    表格id
+ * @param  Int index 行数
+ * @return Int
+ */
+function getTableRowCellsLength(id, index){
+    var mytable = document.getElementById(id);
+    if(index<mytable.rows.length){
+        return mytable.rows[index].cells.length;
+    }else{
+        return 0;
+    }
+}
+  /** 
+ * 遍历表格内容返回数组
+ * @param  Int   id 表格id
+ * @return Array
+ */
+function getTableContent(id){
+    var mytable = document.getElementById(id);
+    
+    var data = [];
+    for(var i=0,rows=mytable.rows.length-1; i<rows; i++){
+        for(var j=0,cells=mytable.rows[i].cells.length; j<cells; j++){
+
+            if(!data[i]){
+                data[i] = new Array();
+            }
+            
+            data[i][j] = mytable.rows[i+1].cells[j].innerHTML;
+            
+        }
+    }
+    return data;
+}    
+ 
+</script>
+	
+  </body>
+</html>

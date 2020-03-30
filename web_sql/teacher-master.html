@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<div class="btn-group">
+    <title>教务管理系统</title>
+	  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link href="CSS/bootstrap.css" rel="stylesheet"/>
+	<link href="CSS/font-awesome/css/font-awesome.css" rel="stylesheet" />
+     <link href="CSS/style.css" rel="stylesheet">
+	
+	<style>
+		#select{width: 200px; line-height: 25px; border-radius: 5px; border:1px solid #ccc; font-size: 12px; padding:0 10px; position: relative;}
+		#select i{width: 0; height: 0; border-top: 5px solid #333; border-left: 5px solid transparent;  border-right: 5px solid transparent;
+			position: absolute; top: 10px; right: 10px;}
+			#select span{display: block; height: 25px; cursor: pointer;}
+			#select ul,#select li{padding: 0; margin:0 }
+			#select li{line-height: 30px; color: #666; list-style-type: none; border-bottom: 1px dashed #eee; cursor: pointer;transition: all 1s ease 0s;}
+			#select li:hover{ border-bottom: 1px solid #51A6FF; background-color: #DAF0FF; padding-left: 20px; font-weight: bold; }
+			#select li:last-child{border-bottom: 0}
+			#select ul{display: none;}
+			.flipx { transform: rotateY(180deg); }
+	</style>
+  </head>
+
+  <body>
+
+  <section id="container" >
+
+      <!--标题-->
+      <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+         </div>
+            <a class="logo"><b>教务管理系统</b></a>
+            <a class="btn btn-warning" id="out" href="login.html">注销</a>
+    </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      左边栏
+      *********************************************************************************************************************************************************** -->
+<aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+ 
+ 				 <p class="centered"><a><img src="head.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">工号：<span id="mageNo"></span></h5>
+                  <h5 class="centered">姓名：<span id="nameNo"></span></h5>
+              	  	
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>课程管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="teacher-master">课程信息</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>考试管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="t-test-info">考试信息</a></li>
+                      </ul>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      *********************************************************************************************************************************************************** -->
+      <!-- 页面 -->
+ <section id="main-content">
+          <section class="wrapper site-min-height">
+    	<h3><i class="fa fa-angle-right"></i> 课程管理 </h3>
+		  		<div class="row mt">
+			  		<div class="col-md-12">
+                      <div class="content-panel">
+                      <div class="col-md-6 col-sm-3 " >
+     								<h5>选择学期>> </h5>
+     							 </div>
+						<div class = "container mb">
+						  <div class = "row search-top ">
+						  <div class="col-md-6 col-sm-3 ">
+							<div class="btn-group">
+	<div id="select">
+		<i></i>
+		<span class="checkspan">点击下拉框选择</span>
+		<ul>
+			<li>2018-2019春季</li>
+			<li>2018-2019冬季</li>
+			<li>2018-2019秋季</li>
+		</ul>
+	</div>
+								</div>
+      							
+						  
+						  </div>
+						  </div>
+                          <section	class ="mt" >
+                          <table class="table table-bordered table-striped  table-hover" id="tb-teachermaster">
+
+                                <thead>
+                                 
+                                 </thead>
+								   <tbody id="tbody">
+							
+							
+                           
+      
+																		
+
+              </tbody>
+            </table>
+<div class="col-md-12 ">
+                           
+     <button class="btn btn-primary btn-lg  col-sm-1 "data-toggle="modal"  id="btn_add" >学生名册</button>
+		
+	</div>
+                     
+                          </section>
+                  </div>
+               </div>	
+		  	</div>
+			
+		</section>
+      </section>
+
+      <!-- 页面 -->
+      <!-- 脚注 -->
+      <footer class="site-footer">
+          <div class="text-center">
+              上海大学  邮编: 200444
+
+          </div>
+      </footer>
+      <!--脚注-->
+  </section>
+
+	<script type="text/javascript" language="javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+	<script src ="js/common-scripts.js"></Script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/activity.js"></script>
+	<script>$('#identifier').modal(options)</script>
+ <script>
+    function getQueryUrlString(name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+      var r = window.location.search.substr(1).match(reg);
+      if(r != null) {
+        return decodeURI(r[2]);
+      }
+      return "请选择";
+     }
+</script>
+<!--初始化代码-->
+<script>
+	 
+     $(document).ready(function() {
+     	var username=getQueryUrlString('username');
+      var name = getQueryUrlString('name');
+      console.log(username);
+      console.log(name);
+		  $('#mageNo').html(username);
+		  $('#nameNo').html(name);
+		  $('#teacher-master').attr("href","teacher-master.html?username=" + username + "&name=" + name);
+   		$('#t-test-info').attr("href","t-test-info.html?username=" + username + "&name=" + name);
+     	console.log(username);
+     	console.log(name);
+     	//var uurl = "t-grade.html?username=" + uname + "&name=" + nam;
+           var table=$('#tb-teachermaster').DataTable(
+		   {"bInfo":false,
+			"iDisplayLength" : 10, //默认显示的记录数 
+			columns: [
+				{ data: 'couNo',title:"课号" },
+                { data: 'couName',title:"课程名" },
+				{ data: 'couTime',title:"上课时间" },
+				{ data: 'couAddr',title:"上课地点" },
+                { data: 'couAns',title:"答疑地点" },
+                ],
+		   });
+		/*"fnDrawCallback"    : function(){
+        　　this.api().column(0).nodes().each(function(cell, i) {
+        　　　　cell.innerHTML =  i + 1;
+        　　});
+        },*/
+
+/*
+$(".mid_table tr").eq(-2).children().last().html(
+    "<p class='tdContent'>"+
+        "<a href='group.do?searchContent="+$searchContent+"&categories="+$categories+"&pat_id="+s.PAT_ID+"' target='_blank'>"+
+        "查看所有"+s.numFound+"条结果>>"+
+        "</a>"+
+    "</p>"
+);*/
+//			"<a href='t-grade.html?username="+username+"&name="+name+"&semester="+$("#select span").text()+"&couNo="+table.rows['selected'].cells[0].innerHTML+"'>学生名册</a>" 
+
+//			 "aoColumnDefs":[{ "render":  function(data, type, full){return "<button  class = 'StudentBtn'>学生名册</button>"}, 
+//							  "aTargets": 5 }]//尼玛的真的恶心！！！找了一晚上！！！
+
+		   
+		 
+		 $('#tb-teachermaster tbody').on('click', 'tr', function () {
+      if ( $(this).hasClass('selected') ) {
+        $(this).removeClass('selected');
+		  console.log($(this));
+      }
+      else {
+		  
+        table.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+		  var semester=$("#select span").text();
+		  var cno =this.cells[0].innerHTML;
+		  window.location.href="t-grade.html?"+"username="+username+"&name="+name+"&semester="+semester+"&couNo="+cno;
+      }
+			
+    });
+		
+           $('#tb-teachermaster toby').html("");
+           $(function(){
+			   
+//			    $(".StudentBtn").bind("click",function(){
+//			 console.log(this);
+//			 console.log("OK");
+//		 });
+		 
+			$(".checkspan").bind("click",function(){
+				var ul = $(this).siblings('ul')
+				if(ul.is(":hidden")){
+					ul.slideDown('400', function() {
+						$(this).find("li").bind("click",function(){
+							var selectLi=$(this).text();
+							$("#select span").text(selectLi);
+							$("#select ul").slideUp(400);
+							t_onload();
+						})
+							ul.mouseleave(function() {
+								$('#select ul').slideUp(400)
+							});
+					});
+				}else{
+					$(this).siblings('ul').slideUp(400)
+				}
+				
+			})
+			
+		})
+
+function t_onload() {
+	var username = $("#mageNo").html();
+	//username = JSON.stringify(username);
+	var semester = $("#select span").text();
+	//alert(semester);
+	//semester = JSON.stringify(semester);
+    //alert(semester);
+    var xhl = new XMLHttpRequest();
+    var method = "GET";
+    var url = "http://localhost/sql_php/info.php?username=" + username + "&semester=" + semester;
+    //alert("okk");
+    
+    
+    //window.alert(xhl.readyState);
+    xhl.onreadystatechange = function () {
+        if(xhl.readyState == 4 && xhl.status == 200) {
+        	//console.log(xhl.responseText);
+        	//window.alert(xhl.responseText);
+            var data = xhl.responseText;
+            console.log(data);
+            if(data != "无查询结果") {
+            	var str = data.split('}');
+            	for(var i = 0; i < str.length - 1; i++) {
+            		str[i] += "}";
+            		var _data = JSON.parse(str[i]);
+            		console.log(_data['couNo']);
+            		table.rows.add([{
+            			"couNo":_data['couNo'],
+            			"couName":_data['couName'],
+            			"couTime":_data['couDayTime'],
+            			"couAddr":_data['couAddr'],
+            			"couAns":_data['couAns'],
+      
+            		}])
+            		.draw();
+            	}
+            }
+            else {
+
+            }
+        }
+    }
+    xhl.open(method, url, true);
+    xhl.send();
+}
+$('#btn_add').click(function(){
+		 console.log(table.rows['selected']);
+	 });	
+      });
+	
+	</script>
+	
+<!--.cells[0].innerHTML-->
+
+  </body>
+</html>

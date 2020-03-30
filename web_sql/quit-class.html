@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+ 
+
+    <title>教务管理系统</title>
+	  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link href="CSS/bootstrap.css" rel="stylesheet"/>
+	<link href="CSS/font-awesome/css/font-awesome.css" rel="stylesheet" />
+     <link href="CSS/style.css" rel="stylesheet">
+	
+  </head>
+
+  <body>
+
+  <section id="container" >
+
+      <!--标题-->
+      <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+         </div>
+            <a class="logo"><b>教务管理系统</b></a>
+            <a class="btn btn-warning" id="out" href="login.html">注销</a>
+    </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      左边栏
+      *********************************************************************************************************************************************************** -->
+<aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+ 
+ 				 <p class="centered"><a><img src="head.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">学号：<span id="StuNo"></h5>
+                  <h5 class="centered">姓名：<span id="StuName"></h5>
+              	  	
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>课程管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="select-class">选课</a></li>
+                     	  <li><a  id="quit-class">退课</a></li>
+						  <li><a  id="class-table">课程表</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>成绩管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="grade-lastest">上学期成绩</a></li>
+                     	  <li><a  id="grade-all">成绩大表</a></li>
+                      </ul>
+                  </li>
+				    <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>考试管理</span>
+                      </a>
+                      <ul class="sub">
+						  <li><a  id="test-info">考试信息</a></li>
+                          <li><a id="credit">学分抵充</a></li>
+                          <li><a id="apply">缓考申请</a></li>
+         
+                      </ul>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      *********************************************************************************************************************************************************** -->
+      <!-- 页面 -->
+ <section id="main-content">
+          <section class="wrapper site-min-height">
+			 
+
+
+    	<h3><i class="fa fa-angle-right"></i>选课管理</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="heightplus">
+                      <div class="col-md-12">
+                             <h4><i class="fa fa-angle-right"></i>退课管理</h4>
+						  
+                      </div>
+						</div>
+                          <section	class ="mt" >
+                          <table class="table table-bordered table-striped  table-hover" id="tb-quit">
+
+                                <thead>
+                                 
+                                 </thead>
+								   <tbody id="tbody">
+							
+							
+                           
+      
+																		
+
+              </tbody>
+            </table>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="submit()" >退课</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">确认退课</h4>
+            </div>
+            <div class="modal-body">
+		<table class="table table-bordered table-striped " id="tb-selected">
+
+            </table></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="commit">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+                     
+                          </section>
+                  </div>
+               </div>	
+		  	</div>
+			
+		</section>
+      </section>
+
+      <!-- 页面 -->
+      <!-- 脚注 -->
+      <footer class="site-footer">
+          <div class="text-center">
+              上海大学  邮编: 200444
+
+          </div>
+      </footer>
+      <!--脚注-->
+  </section>
+
+	<script type="text/javascript" language="javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+	<script src ="js/common-scripts.js"></Script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/activity.js"></script>
+
+  <script src="js/table_operation.js"></script>
+
+<!--初始化代码-->
+
+<script>
+    function getQueryUrlString(name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+      var r = window.location.search.substr(1).match(reg);
+      if(r != null) {
+        return decodeURI(r[2]);
+      }
+      return "请选择";
+     }
+</script> 
+
+<script>
+     $(document).ready(function() {
+     
+    var username=getQueryUrlString('username');
+    var name = getQueryUrlString('name');
+    $('#StuNo').html(username);
+    $('#StuName').html(name);
+    $('#select-class').attr("href","select-class.html?username="+username + "&name=" + name);
+    $('#credit').attr("href","credit.html?username="+username + "&name=" + name);
+    $('#quit-class').attr("href","quit-class.html?username="+username + "&name=" + name);
+    $('#test-info').attr("href","test-info.html?username="+username + "&name=" + name);
+    $('#apply').attr("href","apply.html?username="+username + "&name=" + name); 
+    $('#grade-all').attr("href","grade-all.html?username="+username + "&name=" + name);
+    $('#grade-lastest').attr("href","grade-lastest.html?username="+username + "&name=" + name); 
+    $('#class-table').attr("href","class-table.html?username="+username + "&name=" + name); 
+     
+    var table=$('#tb-quit').DataTable(
+       {"bInfo":false,
+      "iDisplayLength" : 10, //默认显示的记录数 
+      columns: [
+         { "title": "<input align=\"center\" type=\"checkbox\" class=\"checkAll\"  />" },
+         { data: 'no',title:"序号" },
+        { data: 'couName',title:"课程名" },
+        { data: 'couNo',title:"课程号" },
+        { data: 'teaNo',title:"教师号" },
+        { data: 'teaName',title:"教师名" },
+        { data: 'couCredit',title:"学分" },
+         { data: 'courseTime',title:"上课时间" },
+        { data: 'couCnt',title:"额定人数" },
+                   
+                ],
+    "fnDrawCallback"    : function(){
+        　　this.api().column(1).nodes().each(function(cell, i) {
+        　　　　cell.innerHTML =  i + 1;
+        　　});
+        },
+       "aoColumnDefs":[{ "render": function (data, type,row) { return "<input type=\"checkbox\"  name=\"ckb-jobid\" value=" + data + ">"; }, 
+                "aTargets": 0 }]
+
+       });
+   
+    load();
+     
+//     ==true ? true:false;
+     function load(){
+     xmlhttp=GetXmlHttpObject();
+      var i=0;
+      
+      if(xmlhttp!=null)
+      {
+          xmlhttp.onreadystatechange=function()
+          {
+            if(xmlhttp.readyState==4&&xmlhttp.status==200)
+            {  console.log("??")
+              var data=xmlhttp.responseText;
+              if(data!="无结果")
+              {
+                var str=data.split('}');
+                for(var i=0;i<str.length-1;i++){
+                  str[i]+="}";
+                  var _data=JSON.parse(str[i]);
+                  console.log(_data['stuNo']);
+                  table.rows.add([{
+                    "no":_data['couName'],
+                    "couName":_data['couName'],
+                    "couNo":_data['couNo'],
+                    "teaNo":_data['teaNo'],
+                    "teaName":_data['teaName'],
+                    "couCredit":_data['couCredit'],
+                    "courseTime":_data['couDay']+' '+_data['couTime'],
+                    "couCnt":_data['couCnt'],
+                  }]) 
+                    .draw();
+                } 
+              }
+              
+            }
+          };
+      xmlhttp.open("GET","http://localhost/sql_php/MyClass_load.php?stuNo="+username,true);
+      xmlhttp.send();
+      }
+     };
+           function GetXmlHttpObject()
+      {
+      var xmlhttp=null;
+      try
+       {
+       // Firefox, Opera 8.0+, Safari
+       xmlhttp=new XMLHttpRequest();
+       }
+      catch (e)
+       {
+       // Internet Explorer
+       try
+        {
+        xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");
+        }
+       catch (e)
+        {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+       }
+      return xmlhttp;
+      }
+
+    function getTableCon(id){
+    var mytable = document.getElementById(id);
+    var data = [];
+    for(var i=0,rows=mytable.rows.length; i<rows; i++){
+        for(var j=0,cells=mytable.rows[i].cells.length-1; j<cells; j++){
+            if(!data[i]){
+
+                data[i] = new Array();
+            }
+            data[i][j] = mytable.rows[i].cells[j+1].innerHTML;
+            
+        }
+    }
+    return data;
+}
+    $('#commit').click(function(){
+     
+        var num=$('#tb-selected tr').length;
+        var postData=[];
+        var info;
+//      
+        info=getTableCon("tb-selected");
+       
+        var postData=JSON.stringify(info);
+        
+        var xmlhttp;
+      xmlhttp=new XMLHttpRequest();
+      if(xmlhttp!=null)
+      {
+          xmlhttp.onreadystatechange=function(checkall,change)
+          {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {   
+              var data=xmlhttp.responseText;
+              console.log(data);
+              if(data=="提交成功!"){
+                alert("退课成功！");
+                DeleteCheckedRows("tb-quit");
+              } 
+              else
+                alert(data);
+            }
+          }
+      }
+        xmlhttp.open("GET","http://localhost/sql_php/SaveToSQL.php?array="+postData+"&table=courseSelecequit&stuNo="+username,true);
+      xmlhttp.send();
+      
+      
+      
+    });
+  
+});
+
+function submit()
+//Button选课事件
+{var tb = document.getElementById("tb-selected");
+ tb.innerHTML = "";
+  var Tabobj = $("#tb-selected");
+  var Check = $("table input[type=checkbox]:checked");//在table中找input下类型为checkbox属性为选中状态的数据
+    var SelectedDatas=[];
+    
+    Check.each(function () {//遍历
+      var data = {};
+      data["couName"] = $(this).parent().parent().find("td:eq(2)").text();
+      data["couNo"] = $(this).parent().parent().find("td:eq(3)").text();
+      data["teaNo"] = $(this).parent().parent().find("td:eq(4)").text();
+      data["couCredit"] = $(this).parent().parent().find("td:eq(6)").text();
+      SelectedDatas.push(data);
+        })
+  
+  
+        var count=0;
+  for(var i=0;i<SelectedDatas.length;i++)
+    { 
+    
+    var s=SelectedDatas[i];
+      console.log(s);
+    if(s.id!="")
+    {
+    var row = tb.insertRow(count);
+        var c1 = row.insertCell(0);
+        c1.innerHTML = count+1;
+        var c2 = row.insertCell(1);
+        c2.innerHTML = s.couName;
+        var c3 = row.insertCell(2);
+        c3.innerHTML = s.couNo
+        var c4 = row.insertCell(3);
+        c4.innerHTML = s.teaNo;
+        var c5 = row.insertCell(4);
+        c5.innerHTML = s.couCredit;
+      count++;
+    }
+    }
+  
+  
+};
+</script>
+  
+	
+  </body>
+</html>

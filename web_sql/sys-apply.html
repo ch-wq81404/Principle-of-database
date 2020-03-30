@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+ 
+
+    <title>教务管理系统</title>
+	  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link href="CSS/bootstrap.css" rel="stylesheet"/>
+	<link href="CSS/font-awesome/css/font-awesome.css" rel="stylesheet" />
+     <link href="CSS/style.css" rel="stylesheet">
+	
+  </head>
+
+  <body>
+
+  <section id="container" >
+
+      <!--标题-->
+      <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+         </div>
+            <a class="logo"><b>教务管理系统</b></a>
+            <a class="btn btn-warning" id="out" href="login.html">注销</a>
+    </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      左边栏
+      *********************************************************************************************************************************************************** -->
+<aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+ 
+ 				 <p class="centered"><a><img src="head.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">管理员号：<span id="mageNo"></span></h5>
+              	  	
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>人员管理</span>
+                      </a>
+                      <ul class="sub">
+						  <li><a id="sys-student">学生名册</a></li>
+                     	  <li><a id="sys-teacher">教师名册</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>课程管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a id="sys-class">课程信息</a></li>
+                     	  <li><a id="sys-grade">成绩信息</a></li>
+						  <li><a id="sys-test">考试信息</a></li>
+                      </ul>
+                  </li>
+				    <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>申请信息</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a id="sys-credit">学分抵充</a></li>
+                          <li><a id="sys-apply">缓考申请</a></li>
+         
+                      </ul>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      *********************************************************************************************************************************************************** -->
+      <!-- 页面 -->
+ <section id="main-content">
+          <section class="wrapper site-min-height">
+			 
+
+
+    	<h3><i class="fa fa-angle-right"></i>申请管理</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="heightplus">
+                      <div class="col-md-12">
+                             <h4><i class="fa fa-angle-right"></i>缓考申请</h4>
+						  
+                      </div>
+						</div>
+                          <section	class ="mt" >
+                          <table class="table table-bordered table-striped  table-hover" id="tb-sysapply">		<thead></thead>
+							  <tbody id="tbody"></tbody>
+                          </table>
+<!-- data-target="#myModal" onclick="submit()" -->
+    <button class="btn btn-primary btn-lg col-sm-1" data-toggle="modal" id="commit">通过</button>
+	<button class="btn btn-primary btn-lg col-sm-1 col-sm-offset-2" data-toggle="modal" id="refuse">不通过</button>
+<!-- 模态框（Modal） -->
+<!--
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">确认通过</h4>
+            </div>
+            <div class="modal-body">
+		<table class="table table-bordered table-striped " id="tb-selected">
+
+            </table></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="commit">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+                     
+                          </section>
+                  </div>
+               </div>
+			
+		</section>
+      </section>
+
+      <!-- 页面 -->
+      <!-- 脚注 -->
+      <footer class="site-footer">
+          <div class="text-center">
+              上海大学  邮编: 200444
+
+          </div>
+      </footer>
+      <!--脚注-->
+  </section>
+<script src="js/table_operation.js"></script>
+	<script type="text/javascript" language="javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+	<script src ="js/common-scripts.js"></Script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/activity.js"></script>
+	  
+<!--	<script>$('#identifier').modal(options)</script>-->
+<!--初始化代码-->
+	  
+<script>
+	  function getQueryUrlString(name) {
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) {
+				return decodeURI(r[2]);
+			}
+			return "请选择";
+		 }
+</script>	
+<script>
+     $(document).ready(function() {
+		 
+		var username=getQueryUrlString('username');
+		$('#mageNo').html(username);
+		$('#sys-class').attr("href","sys-class.html?username="+username);
+		$('#sys-credit').attr("href","sys-credit.html?username="+username);
+		$('#sys-grade').attr("href","sys-grade.html?username="+username);
+		$('#sys-teacher').attr("href","sys-teacher.html?username="+username); 
+		$('#sys-test').attr("href","sys-test.html?username="+username);
+		$('#sys-student').attr("href","sys-student.html?username="+username); 
+		 
+		var table=$('#tb-sysapply').DataTable(
+		   {"bInfo":false,
+			"iDisplayLength" : 10, //默认显示的记录数 
+			columns: [
+				 { "title": "<input align=\"center\" type=\"checkbox\" class=\"checkAll\"  id=\"checkAll\"/>" },
+				 { data: 'stuNo',title:"学号" },
+                    { data: 'couNo',title:"课号" },
+                ],
+			 "aoColumnDefs":[{ "render": function (data, type,row) { return "<input type=\"checkbox\"  name=\"ckb-jobid\" value=" + data + ">"; }, 
+							  "aTargets": 0 }]
+			});
+		 
+		load();
+		 
+//		 ==true ? true:false;
+		 function load(){
+			xmlhttp=new XMLHttpRequest();
+			var i=0;
+			if(xmlhttp!=null)
+			{
+					xmlhttp.onreadystatechange=function()
+					{
+						if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						{				
+							var data=xmlhttp.responseText;
+							if(data!="无结果")
+							{
+								var str=data.split('}');
+								for(var i=0;i<str.length-1;i++){
+									str[i]+="}";
+									var _data=JSON.parse(str[i]);
+									console.log(_data['stuNo']);
+									table.rows.add([{
+										"stuNo":_data['stuNo'],
+									 	"couNo":_data['couNo'],
+									}])	
+    								.draw();
+								}	
+							}
+							else if(data=="无结果"){
+								alert("无待审核缓考申请");
+							}
+						}
+					};
+			xmlhttp.open("GET","http://localhost/sql_php/Apply_load.php",true);
+			xmlhttp.send();
+			}
+		 };
+		$('#commit').click(function(){
+			if(confirm("再次点击确定：")){
+				var num=$('#tb-sysapply tr').length;
+				var change=[];
+				var Changerows;
+//				var i=0;
+				var checkall=$('#checkAll').attr("checked");
+				if(checkall=="checked")
+					Changerows=getTableContent("tb-sysapply");
+				else{
+					var checkArry = document.getElementsByName("ckb-jobid");
+					for (var i = 0; i < checkArry.length; i++) { 
+						if(checkArry[i].checked == true){
+							//选中的操作
+							change.push(i+1);
+						}
+					}
+					Changerows=getTableRowsContent("tb-sysapply",change);
+				}
+				var Changerows=JSON.stringify(Changerows);
+				var xmlhttp;
+			xmlhttp=new XMLHttpRequest();
+			if(xmlhttp!=null)
+			{
+					xmlhttp.onreadystatechange=function(checkall,change)
+					{
+						if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						{		
+							var data=xmlhttp.responseText;
+							if(data=="提交成功!"){
+								alert(data);
+								DeleteCheckedRows("tb-sysapply");
+							}	
+							else
+								alert(data);
+						}
+					}
+			}
+				xmlhttp.open("GET","http://localhost/sql_php/ChangeStatu.php?flag=true&Changerows="+Changerows,true);
+				xmlhttp.send();
+			}
+			
+			
+		});
+	$('#refuse').click(function(){
+			if(confirm("再次点击确定：")){
+				var num=$('#tb-sysapply tr').length;
+				var change=[];
+				var Changerows;
+//				var i=0;
+				var checkall=$('#checkAll').attr("checked");
+				if(checkall=="checked")
+					Changerows=getTableContent("tb-sysapply");
+				else{
+					var checkArry = document.getElementsByName("ckb-jobid");
+					for (var i = 0; i < checkArry.length; i++) { 
+						if(checkArry[i].checked == true){
+							//选中的操作
+							change.push(i+1);
+						}
+					}
+					Changerows=getTableRowsContent("tb-sysapply",change);
+				}
+				var Changerows=JSON.stringify(Changerows);
+				var xmlhttp;
+			xmlhttp=new XMLHttpRequest();
+			if(xmlhttp!=null)
+			{
+					xmlhttp.onreadystatechange=function(checkall,change)
+					{
+						if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						{		
+							var data=xmlhttp.responseText;
+							if(data=="提交成功!"){
+								alert(data);
+								DeleteCheckedRows("tb-sysapply");
+//								DeleteAll();
+							}	
+							else
+								alert(data);
+						}
+					}
+			}
+				xmlhttp.open("GET","http://localhost/sql_php/ChangeStatu.php?flag=false&Changerows="+Changerows,true);
+				xmlhttp.send();
+			}
+		   });
+});
+</script>
+	
+  </body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+ 
+
+    <title>教务管理系统</title>
+	  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link href="CSS/bootstrap.css" rel="stylesheet"/>
+	<link href="CSS/font-awesome/css/font-awesome.css" rel="stylesheet" />
+     <link href="CSS/style.css" rel="stylesheet">
+	
+  </head>
+
+  <body>
+
+  <section id="container" >
+
+      <!--标题-->
+      <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+         </div>
+            <a class="logo"><b>教务管理系统</b></a>
+            <a class="btn btn-warning" id="out" href="login.html">注销</a>
+    </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      左边栏
+      *********************************************************************************************************************************************************** -->
+<aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+ 
+         <p class="centered"><a><img src="head.jpg" class="img-circle" width="60"></a></p>
+                  <h5 class="centered">学号：<span id="StuNo"></h5>
+                  <h5 class="centered">姓名：<span id="StuName"></h5>
+                    
+                     <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>课程管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="select-class">选课</a></li>
+                        <li><a  id="quit-class">退课</a></li>
+              <li><a  id="class-table">课程表</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>成绩管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  id="grade-lastest">上学期成绩</a></li>
+                        <li><a  id="grade-all">成绩大表</a></li>
+                      </ul>
+                  </li>
+            <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>考试管理</span>
+                      </a>
+                      <ul class="sub">
+              <li><a  id="test-info">考试信息</a></li>
+                          <li><a id="credit">学分抵充</a></li>
+                          <li><a id="apply">缓考申请</a></li>
+                      </ul>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      *********************************************************************************************************************************************************** -->
+      <!-- 页面 -->
+ <section id="main-content">
+          <section class="wrapper site-min-height">
+			 
+
+
+    	<h3><i class="fa fa-angle-right"></i>选课管理</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="heightplus">
+                      <div class="col-md-12">
+                             <h4><i class="fa fa-angle-right"></i>学分抵充情况</h4>
+						  
+                      </div>
+						</div>
+                          <section	class ="mt" >
+                          <table class="table table-bordered table-striped  table-hover" id="tb-credit">
+
+                                <thead>
+                                 
+                                 </thead>
+								   <tbody id="tbody">
+							
+   
+<!-- 模态框（Modal） -->
+							
+                           
+      
+																		
+
+              </tbody>
+            </table>
+	<div class="col-md-12 ">
+                           
+      <button class="btn btn-primary btn-lg col-sm-offset-4 col-sm-4"data-toggle="modal" data-target="#myModal"   >新建申请</button>
+	</div>
+<div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog ">
+<form class="form-horizontal submitstyle ">
+	<div class="form-group">
+		<label for="firstname" class="col-sm-2 control-label">抵充课程号</label>
+		
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="cno" 
+				   placeholder="请输入课程号">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+		<text>* 请在提交申请后将材料送至教务处</text>
+			</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button class="btn btn-default" data-dismiss="modal" id="commit">提交</button>
+		</div>
+	</div>
+</form>
+    </div><!-- /.modal -->
+</div>
+                     
+	</div>
+                     
+                          </section>
+                  </div>
+               </div>	
+		  	</div>
+			
+		</section>
+      </section>
+
+      <!-- 页面 -->
+      <!-- 脚注 -->
+      <footer class="site-footer">
+          <div class="text-center">
+              上海大学  邮编: 200444
+
+          </div>
+      </footer>
+      <!--脚注-->
+  </section>
+
+	<script type="text/javascript" language="javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+	<script src ="js/common-scripts.js"></Script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/activity.js"></script>
+	<script>$('#identifier').modal(options)</script>
+ /
+<!--初始化代码-->
+
+<script>
+    function getQueryUrlString(name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+      var r = window.location.search.substr(1).match(reg);
+
+      if(r != null) {
+
+        return decodeURI(r[2]);
+      }
+      return "请选择";
+     }
+</script> 
+
+<script>
+     $(document).ready(function() {
+    var username=getQueryUrlString('username');
+    var name = getQueryUrlString('name');
+    $('#StuNo').html(username);
+    $('#StuName').html(name);
+    $('#select-class').attr("href","credit.html?username="+username + "&name=" + name);
+    $('#credit').attr("href","credit.html?username="+username + "&name=" + name);
+    $('#quit-class').attr("href","quit-class.html?username="+username + "&name=" + name);
+    $('#test-info').attr("href","test-info.html?username="+username + "&name=" + name);
+    $('#apply').attr("href","apply.html?username="+username + "&name=" + name); 
+    $('#grade-all').attr("href","grade-all.html?username="+username + "&name=" + name);
+    $('#grade-lastest').attr("href","grade-lastest.html?username="+username + "&name=" + name); 
+    $('#class-table').attr("href","class-table.html?username="+username + "&name=" + name); 
+     
+    var table=$('#tb-credit').DataTable(
+       {"bInfo":false,
+      "iDisplayLength" : 10, //默认显示的记录数 
+      columns: [
+        
+        { data: 'couNo',title:"课程号" },
+        { data: 'State',title:"状态" },
+         { data: 'appTime',title:"申请时间" },
+          { data: 'appCredit',title:"申请学分" },
+ 
+                   
+                ],
+ 
+       });
+    load();
+    
+     
+//     ==true ? true:false;
+     function load(){
+     xmlhttp=GetXmlHttpObject();
+      var i=0;
+      
+      if(xmlhttp!=null)
+      {
+          xmlhttp.onreadystatechange=function()
+          {
+            if(xmlhttp.readyState==4&&xmlhttp.status==200)
+            {  
+              var data=xmlhttp.responseText;
+
+              console.log(data);
+              if(data!="无结果")
+              {
+
+                var str=data.split('}');
+                
+                for(var i=0;i<str.length-1;i++){
+                  str[i]+="}";
+                  var _data=JSON.parse(str[i]);
+                  
+                  
+                  table.rows.add([{
+                    
+                   
+                    "couNo":_data['appCouNo'],
+                    "appCredit":_data['appCredit'],
+                    "appTime":_data['appTime'],
+                    
+                    "State":_data['statu'],
+                  }]) 
+                    .draw();
+                } 
+              }
+              
+            }
+          };
+      xmlhttp.open("GET","http://localhost/sql_php/stuCredit_load.php?stuNo="+username,true);
+      xmlhttp.send();
+      }
+     };
+
+  
+   function GetXmlHttpObject()
+      {
+      var xmlhttp=null;
+      try
+       {
+       // Firefox, Opera 8.0+, Safari
+       xmlhttp=new XMLHttpRequest();
+       }
+      catch (e)
+       {
+       // Internet Explorer
+       try
+        {
+        xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");
+        }
+       catch (e)
+        {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+       }
+      return xmlhttp;
+      }
+
+   $('#commit').click(function(){
+     
+       
+//      
+       
+        var value= document.getElementById("cno").value;
+        console.log(value);
+        
+        var xmlhttp;
+      xmlhttp=new XMLHttpRequest();
+      if(xmlhttp!=null)
+      {
+          xmlhttp.onreadystatechange=function(checkall,change)
+          {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {   
+              var data=xmlhttp.responseText;
+              console.log(data);
+              if(data=="提交成功!"){
+                
+               location.reload();
+              } 
+              else
+                alert(data);
+            }
+          }
+      }
+        xmlhttp.open("GET","http://localhost/sql_php/SaveToSQL.php?value="+value+"&table=offsetCredits&stuNo="+getQueryUrlString('username'),true);
+      xmlhttp.send();
+      
+      
+      
+    });
+})
+    
+</script>
+  
+	
+  </body>
+</html>

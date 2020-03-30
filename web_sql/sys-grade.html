@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+ 
+
+    <title>教务管理系统</title>
+	  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link href="CSS/bootstrap.css" rel="stylesheet"/>
+	<link href="CSS/font-awesome/css/font-awesome.css" rel="stylesheet" />
+     <link href="CSS/style.css" rel="stylesheet">
+	
+  </head>
+
+  <body>
+
+  <section id="container" >
+
+      <!--标题-->
+      <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+         </div>
+            <a class="logo"><b>教务管理系统</b></a>
+            <a class="btn btn-warning" id="out" href="login.html">注销</a>
+    </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      左边栏
+      *********************************************************************************************************************************************************** -->
+<aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+ 
+ 				 <p class="centered"><a><img src="head.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">管理员号：<span id="mageNo">S11111</span></h5>
+              	  	
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>人员管理</span>
+                      </a>
+                      <ul class="sub">
+						  <li><a id="sys-student">学生名册</a></li>
+                     	  <li><a id="sys-teacher">教师名册</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>课程管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a id="sys-class">课程信息</a></li>
+                     	  <li><a id="sys-grade">成绩信息</a></li>
+						  <li><a id="sys-test">考试信息</a></li>
+                      </ul>
+                  </li>
+				    <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>申请信息</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a id="sys-credit">学分抵充</a></li>
+                          <li><a id="sys-apply">缓考申请</a></li>
+         
+                      </ul>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      *********************************************************************************************************************************************************** -->
+      <!-- 页面 -->
+ <section id="main-content">
+          <section class="wrapper site-min-height">
+    	<h3><i class="fa fa-angle-right"></i>课程管理</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="heightplus">
+                      <div class="col-md-12">
+                             <h4><i class="fa fa-angle-right"></i>成绩信息</h4>
+					    <div id="search">请选择学期并输入课程号以查看该门课程的成绩信息:&nbsp;&nbsp;
+
+								<input type="text" class="couNo" />
+								<button class="tip-bottom" title="Search"><i class="fa fa-search"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
+							<select id="pid">
+							  <option grade="1" value="2018-2019春季">2018-2019春季</a>
+								<option grade="1" value="2018-2019秋季">2018-2019秋季</a>
+							</select>
+					    </div> 
+                      </div>
+						 
+						</div>
+                      <section	class ="mt" id="allgradechart">
+                          
+
+    
+<!-- 模态框（Modal） -->
+                     
+                          </section>
+                  </div>
+               </div>	
+		  	</div>
+			
+		</section>
+      </section>
+
+      <!-- 页面 -->
+      <!-- 脚注 -->
+      <footer class="site-footer">
+          <div class="text-center">
+              上海大学  邮编: 200444
+
+          </div>
+      </footer>
+      <!--脚注-->
+  </section>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<!--	<script type="text/javascript" language="javascript" src="js/jquery.min.js"></script>-->
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+	<script src ="js/common-scripts.js"></Script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+<!--初始化代码-->
+<script>
+	  function getQueryUrlString(name) {
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) {
+				return decodeURI(r[2]);
+			}
+			return "请选择";
+		 }
+</script>	
+<script>
+     $(document).ready(function() {
+		 var username=getQueryUrlString('username');
+		$('#mageNo').html(username);
+		$('#sys-class').attr("href","sys-class.html?username="+username);
+		$('#sys-apply').attr("href","sys-apply.html?username="+username);
+		$('#sys-credit').attr("href","sys-credit.html?username="+username);
+		$('#sys-teacher').attr("href","sys-teacher.html?username="+username); 
+		$('#sys-test').attr("href","sys-test.html?username="+username);
+		$('#sys-student').attr("href","sys-student.html?username="+username); 
+    var xx = ["课程教师名"];
+    var yy = [];   
+		 
+   var charttype = {
+      zoomType: 'xy'
+   };
+   var title = {
+      text: '不同老师各分段人数及平均分数'   
+   };
+   var xAxis = {
+      categories: ["课程教师名"],
+      crosshair: true
+   };
+   var yAxis = [
+	   {
+		   labels: {
+				format: '{value}人',
+				style: {
+					color: Highcharts.getOptions().colors[1]
+				}
+			},
+      	   title: {
+           	   text: '人数'         
+           }
+	   },
+	   {
+		   labels: {
+			format: '{value} 分',
+			style: {
+				color: Highcharts.getOptions().colors[0]
+			}
+		},
+		   title: {
+           	   text: '平均分数'         
+           },
+		   opposite: true
+   	   }
+   ];
+   var tooltip = {
+      shared: true,
+   };
+   var plotOptions = {  
+         enableMouseTracking: false
+   };
+   var series= [
+	   { name: '0-60分',
+		type: 'column',
+            data: [0],
+		   tooltip: {
+				valueSuffix: ' 人'
+			}
+	   },
+	   { name: '60-70分',
+		type: 'column',
+            data: [0],
+	   		tooltip: {
+				valueSuffix: ' 人'
+			}},
+	   { name: '70-80分',
+		type: 'column',
+            data: [0] },
+	   { name: '80-90分',
+		type: 'column',
+            data: [0],
+	   		tooltip: {
+				valueSuffix: ' 人'
+			}},
+	   { name: '90-100分',
+		type: 'column',
+            data: [0],
+	   		tooltip: {
+				valueSuffix: ' 人'
+			}},
+	   { name:'平均分',
+		type: 'spline',
+		yAxis: 1,
+	        data:[0],
+	   		tooltip: {
+				valueSuffix: '分'
+			}}
+	   			   
+   ];
+
+    var json = {};   
+    json.chart = charttype; 
+    json.title = title;    
+    json.tooltip = tooltip;
+	json.plotOptions=plotOptions;
+    json.xAxis = xAxis;
+    json.yAxis = yAxis;  
+    json.series = series;
+    $('#allgradechart').highcharts(json);
+    var chart=$('#allgradechart').highcharts();
+		 
+
+	$(".tip-bottom").click(function(){
+		var couNo=$('.couNo').val();
+		var semester=$('#pid').val();
+		var xmlhttp;
+			xmlhttp=new XMLHttpRequest();
+			if(xmlhttp!=null)
+			{
+				xmlhttp.onreadystatechange=function()
+					{
+						if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						{		
+							var data=xmlhttp.responseText;
+              console.log(data);
+							if(data=="该课程无成绩信息")
+							{
+								alert("该课程无成绩信息");
+								return ;
+							}
+							data=JSON.parse(data);
+							series[0]['data']=data[1][0];
+							series[1]['data']=data[1][1];
+							series[2]['data']=data[1][2];
+							series[3]['data']=data[1][3];
+							series[4]['data']=data[1][4];
+							series[5]['data']=data[2];
+							chart.update({
+								series : series,
+								xAxis : {categories: data[0],crosshair: true}
+							});
+						}
+					};
+					
+			xmlhttp.open("GET","http://localhost/sql_php/gradeInfo.php?couNo="+couNo+"&semester="+semester,true);
+			xmlhttp.send();
+			}
+	});
+});
+</script>
+  </body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+ 
+
+    <title>教务管理系统</title>
+	  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link href="CSS/bootstrap.css" rel="stylesheet"/>
+	<link href="CSS/font-awesome/css/font-awesome.css" rel="stylesheet" />
+     <link href="CSS/style.css" rel="stylesheet">
+	
+  </head>
+
+  <body>
+
+  <section id="container" >
+
+      <!--标题-->
+      <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+         </div>
+            <a class="logo"><b>教务管理系统</b></a>
+            <a class="btn btn-warning" id="out" href="login.html">注销</a>
+    </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      左边栏
+      *********************************************************************************************************************************************************** -->
+<aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+ 
+ 				 <p class="centered"><a><img src="head.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">管理员号：<span id="mageNo">S11111</span></h5>
+              	  	
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>人员管理</span>
+                      </a>
+                      <ul class="sub">
+						  <li><a id="sys-student">学生名册</a></li>
+                     	  <li><a id="sys-teacher">教师名册</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>课程管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a id="sys-class">课程信息</a></li>
+                     	  <li><a id="sys-grade">成绩信息</a></li>
+						  <li><a id="sys-test">考试信息</a></li>
+                      </ul>
+                  </li>
+				    <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>申请信息</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a id="sys-credit">学分抵充</a></li>
+                          <li><a id="sys-apply">缓考申请</a></li>
+         
+                      </ul>
+                  </li>
+              </ul>
+
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      *********************************************************************************************************************************************************** -->
+      <!-- 页面 -->
+ <section id="main-content">
+          <section class="wrapper site-min-height">
+    	<h3><i class="fa fa-angle-right"></i>人员管理</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="heightplus">
+                      <div class="col-md-12">
+                             <h4><i class="fa fa-angle-right"></i>教师名册</h4>
+						  
+                      </div>
+						</div>
+                          <section	class ="mt" >
+                          <table class="table table-bordered table-striped  table-hover" id="tb-systeacher">
+
+                                <thead>
+                                 
+                                 </thead>
+								   <tbody id="tbody">
+							
+							
+                           
+      
+																		
+
+              </tbody>
+            </table>
+
+    <div class="col-md-12 ">
+                           
+     <button class="btn btn-primary btn-lg  col-sm-1 "data-toggle="modal"  id="btn_add" >新增</button>
+		<button class="btn btn-primary btn-lg col-sm-offset-2 col-sm-1"data-toggle="modal" id="btn_delete"  >删除</button>
+			<button class="btn btn-primary btn-lg col-sm-offset-2 col-sm-1"data-toggle="modal"   id="btn_edit">修改</button>
+		
+		<button class="btn btn-primary btn-lg col-sm-offset-2 col-sm-1"data-toggle="modal"   id="btn_commit">提交</button>
+	</div>
+					
+							  
+							  
+<div class="modal fade" id="editStudentInfo" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">修改教师信息</h4>
+      </div>
+	<div id="editStudentModal" class="modal-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label for="editteaName" class="col-sm-2 control-label">姓名：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="editteaName" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="editteaSex" class="col-sm-2 control-label">性别：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="editteaSex" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="editteaBirth" class="col-sm-2 control-label">出生年月：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="editteaBirth" type="date">
+            </div>
+          </div>
+			<div class="form-group">
+            <label for="editteaEdu" class="col-sm-2 control-label">学历：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="editteaEdu" type="text" placeholder="如“本科”“硕士研究生”“院士”“博士研究生”等等">
+            </div>
+          </div><div class="form-group">
+            <label for="editteaTit" class="col-sm-2 control-label">职称：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="editteaTit" type="text" placeholder="如“讲师”“副教授”“教授”">
+            </div>
+          </div><div class="form-group">
+            <label for="editfacNo" class="col-sm-2 control-label">院系号：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="editfacNo" type="text">
+            </div>
+          </div><div class="form-group">
+            <label for="editteaPhone" class="col-sm-2 control-label">联系方式：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="editteaPhone" type="text" maxlength="11">
+            </div>
+          </div><div class="form-group">
+            <label for="editteaIn" class="col-sm-2 control-label">入职年份：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="editteaIn" type="text" placeholder="如“2019-09-01”，只修改年份">
+            </div>
+          </div><div class="form-group">
+            <label for="editteaOffice" class="col-sm-2 control-label">办公室：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="editteaOffice" type="text">
+            </div>
+          </div>
+			
+        </div>
+       </div>
+
+      <div class="modal-footer">
+        <div class="center-block">
+          <button id="cancelEdit" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button id="saveEdit" type="button" class="btn btn-success" data-dismiss="modal">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+		
+<div class="modal fade" id="deleteStudent" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">确认要删除吗？</h4>
+      </div>
+	
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button id="deleter" type="button" class="btn btn-danger" data-dismiss="modal">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+							  
+
+							  
+<div class="modal fade" id="addStudent" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">添加教师</h4>
+      </div>
+      <div id="addStudentModal" class="modal-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">姓名：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="teaName" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="addr" class="col-sm-2 control-label">性别：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="teaSex" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="id" class="col-sm-2 control-label">出生年月：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="teaBirth" type="date">
+            </div>
+          </div>
+			<div class="form-group">
+            <label for="id" class="col-sm-2 control-label">学历：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="teaEdu" type="text" placeholder="如“本科”“硕士研究生”“院士”“博士研究生”等等">
+            </div>
+          </div><div class="form-group">
+            <label for="id" class="col-sm-2 control-label">职称：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="teaTit" type="text" placeholder="如“讲师”“副教授”“教授”">
+            </div>
+          </div><div class="form-group">
+            <label for="id" class="col-sm-2 control-label">院系号：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="facNo" type="text">
+            </div>
+          </div><div class="form-group">
+            <label for="id" class="col-sm-2 control-label">联系方式：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="teaPhone" type="text" maxlength="11">
+            </div>
+          </div><div class="form-group">
+            <label for="id" class="col-sm-2 control-label">入职年份：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="teaIn" type="text" placeholder="如“2019-09-01”，只修改年份">
+            </div>
+          </div><div class="form-group">
+            <label for="id" class="col-sm-2 control-label">办公室：</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="teaOffice" type="text">
+            </div>
+          </div>
+			
+        </div>
+       </div>
+      <div class="modal-footer">
+        <div class="center-block">
+          <button id="cancelAdd" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button id="addStudentInfo" type="button" class="btn btn-success" data-dismiss="modal">保存</button>
+        </div>
+      </div>
+  
+  </div>
+</div>
+  
+					  
+							  
+				  
+                          </section>
+                  </div>
+               </div>	
+		  	</div>
+			
+		</section>
+      </section>
+
+      <!-- 页面 -->
+      <!-- 脚注 -->
+      <footer class="site-footer">
+          <div class="text-center">
+              上海大学  邮编: 200444
+
+          </div>
+      </footer>
+      <!--脚注-->
+  </section>
+
+	<script type="text/javascript" language="javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+	<script src ="js/common-scripts.js"></Script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/activity.js"></script>
+ /
+<!--初始化代码-->
+<script>
+	  function getQueryUrlString(name) {
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) {
+				return decodeURI(r[2]);
+			}
+			return "请选择";
+		 }
+</script>	
+<script>
+     $(document).ready(function() {
+		 var username=getQueryUrlString('username');
+		$('#mageNo').html(username);
+		$('#sys-class').attr("href","sys-class.html?username="+username);
+		$('#sys-apply').attr("href","sys-apply.html?username="+username);
+		$('#sys-grade').attr("href","sys-grade.html?username="+username);
+		$('#sys-credit').attr("href","sys-credit.html?username="+username); 
+		$('#sys-test').attr("href","sys-test.html?username="+username);
+		$('#sys-student').attr("href","sys-student.html?username="+username); 
+           var table= $('#tb-systeacher').DataTable(
+		   {"bInfo":false,
+			"iDisplayLength" : 10, //默认显示的记录数 
+			columns: [
+				 { data: 'teaName',title:"姓名" },
+                    { data: 'teaSex',title:"性别" },
+				{ data: 'teaBirth',title:"出生年月" },
+				{ data: 'teaEdu',title:"学历" },
+                    { data: 'teaTit',title:"职称" },
+				 { data: 'facNo',title:"院系号" },
+				{ data: 'teaPhone',title:"联系方式" },
+				{ data: 'teaIn',title:"入职年份" },
+                   { data: 'teaOffice',title:"办公室" },
+                ],
+
+		   });
+		 
+		 
+
+    $('#tb-systeacher tbody').on('click', 'tr', function () {
+      if ( $(this).hasClass('selected') ) {
+        $(this).removeClass('selected');
+      }
+      else {
+        table.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+      }
+    });
+    // 取消添加
+    $("#cancelAdd").on('click', function() {
+      console.log('cancelAdd');
+      $("#addStudentModal").find('input').val('')
+    })
+    // 添加图书信息
+    $("#addStudentInfo").on('click', function() {
+      console.log('addStudentInfo'); 
+        if ($("#addStudentModal").find('input').val() !== '') {
+		  var teaName = $("#teaName").val()
+          var teaSex = $("#teaSex").val()
+          var teaBirth = $("#teaBirth").val()
+		  var teaEdu = $("#teaEdu").val()
+          var teaTit = $("#teaTit").val()
+          var facNo = $("#facNo").val()
+		  var teaPhone = $("#teaPhone").val()
+          var teaIn = $("#teaIn").val()
+          var teaOffice = $("#teaOffice").val()
+          var addInfos = [].concat(teaName,teaSex,teaBirth,teaEdu,teaTit,facNo,teaPhone,teaIn,teaOffice);
+          for (var i = 0; i < addInfos.length; i++) {
+            if (addInfos[i] === '') {
+              alert('内容不能为空')
+            }
+          }
+          table.rows.add( [ {
+			  "teaName":teaName,
+			  "teaSex":teaSex,
+			  "teaBirth":teaBirth,
+			  "teaEdu":teaEdu,
+			  "teaTit":teaTit,
+			  "facNo":facNo,
+			  "teaPhone":teaPhone,
+			  "teaIn":teaIn,
+			  "teaOffice":teaOffice,
+    } ] )
+    .draw();
+          $("#addStudentModal").find('input').val('')
+        }
+      })  
+
+    $("#btn_add").click(function(){
+      console.log('add');
+      $("#addStudent").modal()
+    });
+		 
+    // 编辑图书
+    $("#btn_edit").click(function () {
+      console.log('edit');
+      if (table.rows('.selected').data().length) {
+        $("#editStudentInfo").modal()
+        var rowData = table.rows('.selected').nodes()[0];
+        var inputs = $("#editStudentModal").find('input')
+        for (var i = 0; i < inputs.length; i++) {
+          $(inputs[i]).val(rowData.cells[i].innerHTML)
+        }
+      } else {
+        alert('请选择项目');
+      }
+    });
+    // 保存编辑
+    $("#saveEdit").click(function() {
+     var editteaNo = $("#editteaNo").val()
+		  var editteaName = $("#editteaName").val()
+          var editteaSex = $("#editteaSex").val()
+          var editteaBirth = $("#editteaBirth").val()
+		  var editteaEdu = $("#editteaEdu").val()
+          var editteaTit = $("#editteaTit").val()
+          var editfacNo = $("#editfacNo").val()
+		  var editteaPhone = $("#editteaPhone").val()
+          var editteaIn = $("#editteaIn").val()
+          var editteaOffice = $("#editteaOffice").val()
+          var editInfos = [].concat(editteaName,editteaSex,editteaBirth,editteaEdu,editteaTit,editfacNo,editteaPhone,editteaIn,editteaOffice);
+      var rowData = table.rows('.selected').nodes()[0];
+      for (var i = 0; i < editInfos.length; i++) {
+        if (editInfos[i] !== '') {
+          rowData.cells[i].innerHTML = editInfos[i];
+
+        } else {
+          alert('内容不能为空')
+        }
+      }    
+    })
+    // 取消保存
+    $("#cancelEdit").click(function() {
+      console.log('cancelAdd');
+      $("#editStudentModal").find('input').val('')
+    })
+    // 删除项目
+    $('#btn_delete').click(function () {
+      if (table.rows('.selected').data().length) {
+        $("#deleteStudent").modal()
+      } else {
+        alert('请选择项目');
+      }
+    });
+    // 删除
+    $('#deleter').click(function () {
+      table.row('.selected').remove().draw(false);
+    });
+		 //提交到数据库
+	$('#btn_commit').click(function(){
+		if(confirm("你确定提交吗？")){
+			var num = $("#tb-systeacher tr").length;
+			var info=[];
+			for(var i=1;i<num;i++){
+				var obj={};	
+				obj.teaName=$("#tb-systeacher tr").eq(i).children("td").eq(0).text();
+				obj.teaSex=$("#tb-systeacher tr").eq(i).children("td").eq(1).text();
+				obj.teaBirth=$("#tb-systeacher tr").eq(i).children("td").eq(2).text();
+				obj.teaEdu=$("#tb-systeacher tr").eq(i).children("td").eq(3).text();
+				obj.teaTit=$("#tb-systeacher tr").eq(i).children("td").eq(4).text();
+				obj.facNo=$("#tb-systeacher tr").eq(i).children("td").eq(5).text();
+				obj.teaPhone=$("#tb-systeacher tr").eq(i).children("td").eq(6).text();
+				obj.teaIn=$("#tb-systeacher tr").eq(i).children("td").eq(7).text();
+				obj.teaOffice=$("#tb-systeacher tr").eq(i).children("td").eq(8).text();
+				info.push(obj);
+			}
+			var postData=JSON.stringify(info);
+			var xmlhttp;
+			xmlhttp=new XMLHttpRequest();
+			if(xmlhttp!=null)
+			{
+					xmlhttp.onreadystatechange=function()
+					{
+						if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						{		
+							var data=xmlhttp.responseText;
+							if(data=="提交成功!"){
+								alert(data);
+								location.reload();
+							}	
+							else
+								alert(data);
+//							console.log(data);
+						}
+					};
+			xmlhttp.open("GET","http://localhost/sql_php/SaveToSQL.php?array="+postData+"&table=teacherMessage",true);
+			xmlhttp.send();
+			}
+		}
+	});
+  });
+
+</script>
+	
+  </body>
+</html>
